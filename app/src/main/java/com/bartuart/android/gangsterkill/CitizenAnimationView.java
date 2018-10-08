@@ -15,14 +15,14 @@ public class CitizenAnimationView extends View {
     /**
      * Class representing the state of a star
      */
-    private static class Citizen {
+    /*private static class Citizen {
         private float x;
         private float y;
         private float b;
         //private float scale;
         //private float alpha;
         private float speed;
-    }
+    }*/
 
     private static final int BASE_SPEED_DP_PER_S = 200;
     private static final int COUNT = 2;
@@ -78,8 +78,8 @@ public class CitizenAnimationView extends View {
         // The starting position is dependent on the size of the view,
         // which is why the model is initialized here, when the view is measured.
         for (int i = 0; i < mStars.length; i++) {
-            final Citizen citizen = new Citizen();
-            initializeStar(citizen, width, height);
+            final Citizen citizen = new Citizen(R.mipmap.citizen, Citizen.kRandomizer.nextInt(), Citizen.bRandomizer.nextInt(), Citizen.speedRandomizer.nextInt(), width, height);
+            //initializeStar(citizen, width, height);
             mStars[i] = citizen;
         }
     }
@@ -90,9 +90,9 @@ public class CitizenAnimationView extends View {
         for (final Citizen citizen : mStars) {
             // Ignore the star if it's outside of the view bounds
             final float starSize = mBaseSize;
-            if (citizen.y + starSize < 0 || citizen.y - starSize > viewHeight) {
+           /* if (citizen.y + starSize < 0 || citizen.y - starSize > viewHeight) {
                 continue;
-            }
+            }*/
 
             // Save the current canvas state
             final int save = canvas.save();
@@ -176,22 +176,24 @@ public class CitizenAnimationView extends View {
      */
     private void updateState(float deltaMs) {
         // Converting to seconds since PX/S constants are easier to understand
-        final float deltaSeconds = deltaMs / 1000f;
+        //final float deltaSeconds = deltaMs / 1000f;
         final int viewWidth = getWidth();
         final int viewHeight = getHeight();
 
         for (final Citizen citizen : mStars) {
             // Move the star based on the elapsed time and it's speed
-            citizen.x += citizen.speed;
+            //citizen.x += citizen.speed;
             //citizen.y -= citizen.speed * deltaSeconds;
-            citizen.y = citizen.speed * citizen.x + citizen.b;
+            //citizen.y = citizen.speed * citizen.x + citizen.b;
 
             // If the star is completely outside of the view bounds after
             // updating it's position, recycle it.
-            final float size = mBaseSize;
-            if (citizen.y + size < 0) {
-                initializeStar(citizen, viewWidth, viewHeight);
-            }
+            //final float size = mBaseSize;
+            //if (citizen.y + size < 0) {
+            //    initializeStar(citizen, viewWidth, viewHeight);
+            //}
+
+            citizen.setNewPosition(viewWidth, viewHeight);
         }
     }
 
@@ -206,14 +208,14 @@ public class CitizenAnimationView extends View {
         //citizen.scale = SCALE_MIN_PART + SCALE_RANDOM_PART * mRnd.nextFloat();
 
         // Set X to a random value within the width of the view
-        citizen.x = viewWidth * mRnd.nextFloat();
+        //citizen.x = viewWidth * mRnd.nextFloat();
 
-        citizen.speed = new Random(10).nextFloat();
-        citizen.b = new Random(30).nextFloat();
+        //citizen.speed = new Random(10).nextFloat();
+        //citizen.b = new Random(30).nextFloat();
 
         // Set the Y position
         // Start at the bottom of the view
-        citizen.y = citizen.speed * citizen.x + citizen.b;
+        //citizen.y = citizen.speed * citizen.x + citizen.b;
         // The Y value is in the center of the star, add the size
         // to make sure it starts outside of the view bound
         //citizen.y += citizen.scale * mBaseSize;
