@@ -15,7 +15,7 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/cityzen_linear_layout"
+            android:id="@+id/citizen_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -25,12 +25,13 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/cityzen"/>
+                android:src="@mipmap/citizen"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cytizen"
-                android:layout_gravity="center"/>
+                android:text="@string/citizen_text"
+                android:layout_gravity="center"
+                style="@style/basicText"/>
         </LinearLayout>
 
         <LinearLayout
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_toRightOf="@id/cityzen_linear_layout"
+            android:layout_toRightOf="@id/citizen_linear_layout"
             android:layout_centerInParent="true"
             android:paddingRight="15dp">
             <ImageView
@@ -48,8 +49,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gangster"
-                android:layout_gravity="center"/>
+                android:text="@string/gangster_text"
+                android:layout_gravity="center"
+                style="@style/basicText"/>
         </LinearLayout>
 
         <TextView
@@ -57,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/gangster_linear_layout"
             android:layout_centerInParent="true"
-            android:text="Scrore: 15"/>
+            android:text="@string/score_text"
+            style="@style/scoreText"/>
 
     </RelativeLayout>
 
@@ -84,13 +87,13 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
-            android:text="Start/Stop"/>
+            android:text="@string/start_button_text"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:text="Reset"/>
+            android:text="@string/reset_button_text" />
     </RelativeLayout>
 
 
