@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nogalini bandītu</string>
+    <string name="gangster_text">Bandīts</string>
+    <string name="citizen_text">Iedzīvotājs</string>
+    <string name="score_text">Punkti: 0</string>
+    <string name="start_button_text">Starts</string>
+    <string name="stop_button_text">Stop</string>
+    <string name="reset_button_text">Nomest</string>
+</resources>
