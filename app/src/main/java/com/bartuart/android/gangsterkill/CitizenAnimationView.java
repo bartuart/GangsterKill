@@ -111,10 +111,10 @@ public class CitizenAnimationView extends View {
             canvas.restoreToCount(save);
         }
 
-        for (final Citizen gangsters : citizens) {
+        for (final Citizen gangster : gangsters) {
             // Ignore the star if it's outside of the view bounds
             final float starSize = mBaseSize;
-            if (gangsters.y + starSize < 0 || gangsters.y - starSize > viewHeight) {
+            if (gangster.y + starSize < 0 || gangster.y - starSize > viewHeight) {
                 continue;
             }
 
@@ -122,7 +122,7 @@ public class CitizenAnimationView extends View {
             final int save = canvas.save();
 
             // Move the canvas to the center of the star
-            canvas.translate(gangsters.x, gangsters.y);
+            canvas.translate(gangster.x, gangster.y);
 
             // Rotate the canvas based on how far the star has moved
             //final float progress = (citizen.y + starSize) / viewHeight;
@@ -205,67 +205,11 @@ public class CitizenAnimationView extends View {
         final int viewHeight = getHeight();
 
         for (final Citizen citizen : citizens) {
-            // Move the star based on the elapsed time and it's speed
-            //citizen.x += citizen.speed;
-            //citizen.y -= citizen.speed * deltaSeconds;
-            //citizen.y = citizen.speed * citizen.x + citizen.b;
-
-            // If the star is completely outside of the view bounds after
-            // updating it's position, recycle it.
-            //final float size = mBaseSize;
-            //if (citizen.y + size < 0) {
-            //    initializeStar(citizen, viewWidth, viewHeight);
-            //}
-
             citizen.setNewPosition(viewWidth, viewHeight, coordinates[0], coordinates[1]);
         }
 
-        for (final Citizen gangsters : citizens) {
-            // Move the star based on the elapsed time and it's speed
-            //citizen.x += citizen.speed;
-            //citizen.y -= citizen.speed * deltaSeconds;
-            //citizen.y = citizen.speed * citizen.x + citizen.b;
-
-            // If the star is completely outside of the view bounds after
-            // updating it's position, recycle it.
-            //final float size = mBaseSize;
-            //if (citizen.y + size < 0) {
-            //    initializeStar(citizen, viewWidth, viewHeight);
-            //}
-
-            gangsters.setNewPosition(viewWidth, viewHeight, coordinates[0], coordinates[1]);
+        for (final Citizen gangster : gangsters) {
+            gangster.setNewPosition(viewWidth, viewHeight, coordinates[0], coordinates[1]);
         }
-    }
-
-    /**
-     * Initialize the given star by randomizing it's position, scale and alpha
-     * @param citizen the star to initialize
-     * @param viewWidth the view width
-     * @param viewHeight the view height
-     */
-    private void initializeStar(Citizen citizen, int viewWidth, int viewHeight) {
-        // Set the scale based on a min value and a random multiplier
-        //citizen.scale = SCALE_MIN_PART + SCALE_RANDOM_PART * mRnd.nextFloat();
-
-        // Set X to a random value within the width of the view
-        //citizen.x = viewWidth * mRnd.nextFloat();
-
-        //citizen.speed = new Random(10).nextFloat();
-        //citizen.b = new Random(30).nextFloat();
-
-        // Set the Y position
-        // Start at the bottom of the view
-        //citizen.y = citizen.speed * citizen.x + citizen.b;
-        // The Y value is in the center of the star, add the size
-        // to make sure it starts outside of the view bound
-        //citizen.y += citizen.scale * mBaseSize;
-        // Add a random offset to create a small delay before the
-        // star appears again.
-        //citizen.y += viewHeight * mRnd.nextFloat() / 4f;
-
-        // The alpha is determined by the scale of the star and a random multiplier.
-        //citizen.alpha = ALPHA_SCALE_PART * citizen.scale + ALPHA_RANDOM_PART * mRnd.nextFloat();
-        // The bigger and brighter a star is, the faster it moves
-        //citizen.speed = mBaseSpeed * citizen.alpha * citizen.scale;
     }
 }
