@@ -9,26 +9,30 @@ public class Citizen {
     private final int CITIZEN_RESOURCE_ID = R.mipmap.citizen;
     private final int GANGSTER_RESOURCE_ID = R.mipmap.gangster;
 
+    private final float[] K_RANDOMIZER_ARRAY = {0, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1};
+    private final int B_RANDOMIZER_VALUE = 10;
+    private final int SPEED_RANDOMIZER_VALUE = 15;
+
+    private Random kRandomizer = new Random();
+    private Random bRandomizer = new Random();
+    private Random speedRandomizer = new Random();
+
+
     public float x;
     public float y;
     private float k;
     private float b;
-
     private float speed;
 
-    public static Random kRandomizer = new Random(100);
-    public static Random bRandomizer = new Random(50);
-
-    public static Random speedRandomizer = new Random(3);
 
 
-    public Citizen(int resourceID, int k, int b, int speed, int parentViewWidth, int parentViewHeight, int viewCoordinateX, int viewCoordinateY){
+    public Citizen(int resourceID, int viewCoordinateX){
         this.resourceID = resourceID;
-        this.x = viewCoordinateX + 40;
-        this.y = viewCoordinateY + 40;
-        this.k = 0.5f;
-        this.b = 0;
-        this.speed = 15;
+        this.x = viewCoordinateX + 90;
+        this.y = viewCoordinateX + 90;
+        this.k = K_RANDOMIZER_ARRAY[kRandomizer.nextInt(K_RANDOMIZER_ARRAY.length)];
+        this.b = bRandomizer.nextInt(this.B_RANDOMIZER_VALUE);
+        this.speed = speedRandomizer.nextInt(SPEED_RANDOMIZER_VALUE);
     }
 
     public void setNewPosition(int parentViewWidth, int parentViewHeight, int viewCoordinateX, int viewCoordinateY){
