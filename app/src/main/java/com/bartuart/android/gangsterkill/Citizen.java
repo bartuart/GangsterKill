@@ -35,7 +35,6 @@ public class Citizen {
 
         int min_x_value = viewCoordinateX;
         int max_x_value = viewCoordinateX + parentViewWidth - 50;
-        //this.x = this.x + this.speed;
         if(this.x + this.speed <= min_x_value || this.x + this.speed >= max_x_value){
             this.speed = -1 * this.speed;
             this.k = this.k * -1;
@@ -51,29 +50,5 @@ public class Citizen {
             this.k = this.k * -1;
         } else
             this.y = this.k * this.x + this.b;
-
-        /* if(this.y >= max_y_value){
-            this.y = max_y_value - this.y;
-            //this.k = this.k * -1;
-        } */
-
-        /*this.x = (this.x + this.speed) - parentViewWidth;
-        if(this.x < 0)
-            this.x = - this.x;
-
-        this.y = (this.k * this.x + this.b) - parentViewHeight;
-        if(this.y < 0)
-            this.y = - this.y; */
-
-        /* this.x = this.x + this.speed;
-            if(this.x >= parentViewWidth){
-                this.x = parentViewWidth - this.x;
-                this.b = - this.b;
-            }
-        this.y = this.k * this.x + this.b;
-            if(this.y >= parentViewHeight){
-                this.y = - this.y;
-                this.b = - this.b;
-            } */
     }
 }
