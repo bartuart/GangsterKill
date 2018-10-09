@@ -12,38 +12,19 @@ import java.util.Random;
 
 public class CitizenAnimationView extends View {
 
-    /**
-     * Class representing the state of a star
-     */
-    /*private static class Citizen {
-        private float x;
-        private float y;
-        private float b;
-        //private float scale;
-        //private float alpha;
-        private float speed;
-    }*/
-
     private static final int BASE_SPEED_DP_PER_S = 200;
-    private static final int COUNT = 3;
+    private static final int COUNT = 4;
     private static final int SEED = 1337;
 
     private int [] coordinates;
 
-    /** The minimum scale of a star */
-    //private static final float SCALE_MIN_PART = 0.45f;
-    /** How much of the scale that's based on randomness */
-    //private static final float SCALE_RANDOM_PART = 0.55f;
-    /** How much of the alpha that's based on the scale of the star */
-    //private static final float ALPHA_SCALE_PART = 0.5f;
-    /** How much of the alpha that's based on randomness */
-    //private static final float ALPHA_RANDOM_PART = 0.5f;
-
-    private final Citizen[] mStars = new Citizen[COUNT];
+    private final Citizen[] citizens = new Citizen[COUNT];
+    private final Citizen[] gangsters = new Citizen[COUNT];
     private final Random mRnd = new Random(SEED);
 
     private TimeAnimator mTimeAnimator;
-    private Drawable mDrawable;
+    private Drawable citizenDrawable;
+    private Drawable gangsterDrawable;
 
     private float mBaseSpeed;
     private float mBaseSize;
@@ -68,8 +49,9 @@ public class CitizenAnimationView extends View {
     }
 
     private void init() {
-        mDrawable = ContextCompat.getDrawable(getContext(), R.mipmap.citizen);
-        mBaseSize = Math.max(mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight()) / 2f;
+        citizenDrawable = ContextCompat.getDrawable(getContext(), R.mipmap.citizen);
+        gangsterDrawable = ContextCompat.getDrawable(getContext(), R.mipmap.gangster);
+        mBaseSize = Math.max(citizenDrawable.getIntrinsicWidth(), citizenDrawable.getIntrinsicHeight()) / 2f;
         mBaseSpeed = BASE_SPEED_DP_PER_S * getResources().getDisplayMetrics().density;
     }
 
@@ -82,18 +64,25 @@ public class CitizenAnimationView extends View {
 
         // The starting position is dependent on the size of the view,
         // which is why the model is initialized here, when the view is measured.
-        for (int i = 0; i < mStars.length; i++) {
+        for (int i = 0; i < citizens.length; i++) {
             final Citizen citizen = new Citizen(R.mipmap.citizen,
                     coordinates[0]);
             //initializeStar(citizen, width, height);
-            mStars[i] = citizen;
+            citizens[i] = citizen;
+        }
+
+        for (int i = 0; i < gangsters.length; i++) {
+            final Citizen gangster = new Citizen(R.mipmap.gangster,
+                    coordinates[0]);
+            //initializeStar(citizen, width, height);
+            gangsters[i] = gangster;
         }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         final int viewHeight = getHeight();
-        for (final Citizen citizen : mStars) {
+        for (final Citizen citizen : citizens) {
             // Ignore the star if it's outside of the view bounds
             final float starSize = mBaseSize;
            if (citizen.y + starSize < 0 || citizen.y - starSize > viewHeight) {
@@ -112,11 +101,40 @@ public class CitizenAnimationView extends View {
 
             // Prepare the size and alpha of the drawable
             final int size = Math.round(starSize);
-            mDrawable.setBounds(-size, -size, size, size);
+            citizenDrawable.setBounds(-size, -size, size, size);
             //mDrawable.setAlpha(Math.round(255 * citizen.alpha));
 
             // Draw the star to the canvas
-            mDrawable.draw(canvas);
+            citizenDrawable.draw(canvas);
+
+            // Restore the canvas to it's previous position and rotation
+            canvas.restoreToCount(save);
+        }
+
+        for (final Citizen gangsters : citizens) {
+            // Ignore the star if it's outside of the view bounds
+            final float starSize = mBaseSize;
+            if (gangsters.y + starSize < 0 || gangsters.y - starSize > viewHeight) {
+                continue;
+            }
+
+            // Save the current canvas state
+            final int save = canvas.save();
+
+            // Move the canvas to the center of the star
+            canvas.translate(gangsters.x, gangsters.y);
+
+            // Rotate the canvas based on how far the star has moved
+            //final float progress = (citizen.y + starSize) / viewHeight;
+            //canvas.rotate(360 * progress);
+
+            // Prepare the size and alpha of the drawable
+            final int size = Math.round(starSize);
+            gangsterDrawable.setBounds(-size, -size, size, size);
+            //mDrawable.setAlpha(Math.round(255 * citizen.alpha));
+
+            // Draw the star to the canvas
+            gangsterDrawable.draw(canvas);
 
             // Restore the canvas to it's previous position and rotation
             canvas.restoreToCount(save);
@@ -186,7 +204,7 @@ public class CitizenAnimationView extends View {
         final int viewWidth = getWidth();
         final int viewHeight = getHeight();
 
-        for (final Citizen citizen : mStars) {
+        for (final Citizen citizen : citizens) {
             // Move the star based on the elapsed time and it's speed
             //citizen.x += citizen.speed;
             //citizen.y -= citizen.speed * deltaSeconds;
@@ -200,6 +218,22 @@ public class CitizenAnimationView extends View {
             //}
 
             citizen.setNewPosition(viewWidth, viewHeight, coordinates[0], coordinates[1]);
+        }
+
+        for (final Citizen gangsters : citizens) {
+            // Move the star based on the elapsed time and it's speed
+            //citizen.x += citizen.speed;
+            //citizen.y -= citizen.speed * deltaSeconds;
+            //citizen.y = citizen.speed * citizen.x + citizen.b;
+
+            // If the star is completely outside of the view bounds after
+            // updating it's position, recycle it.
+            //final float size = mBaseSize;
+            //if (citizen.y + size < 0) {
+            //    initializeStar(citizen, viewWidth, viewHeight);
+            //}
+
+            gangsters.setNewPosition(viewWidth, viewHeight, coordinates[0], coordinates[1]);
         }
     }
 
