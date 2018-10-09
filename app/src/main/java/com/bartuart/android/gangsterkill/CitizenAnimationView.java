@@ -25,7 +25,7 @@ public class CitizenAnimationView extends View {
     }*/
 
     private static final int BASE_SPEED_DP_PER_S = 200;
-    private static final int COUNT = 1;
+    private static final int COUNT = 3;
     private static final int SEED = 1337;
 
     private int [] coordinates;
@@ -84,13 +84,7 @@ public class CitizenAnimationView extends View {
         // which is why the model is initialized here, when the view is measured.
         for (int i = 0; i < mStars.length; i++) {
             final Citizen citizen = new Citizen(R.mipmap.citizen,
-                    Citizen.kRandomizer.nextInt(),
-                    Citizen.bRandomizer.nextInt(),
-                    Citizen.speedRandomizer.nextInt(),
-                    width,
-                    height,
-                    coordinates[0],
-                    coordinates[1]);
+                    coordinates[0]);
             //initializeStar(citizen, width, height);
             mStars[i] = citizen;
         }
