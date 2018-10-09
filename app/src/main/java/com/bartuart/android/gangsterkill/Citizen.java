@@ -26,8 +26,8 @@ public class Citizen {
         this.resourceID = resourceID;
         this.x = viewCoordinateX + 40;
         this.y = viewCoordinateX + 40;
-        this.k = 2;
-        this.b = 25;
+        this.k = 0.7f;
+        this.b = 0;
         this.speed = 4;
     }
 
@@ -49,7 +49,7 @@ public class Citizen {
             //this.y = this.y - 50;
             if(this.k * this.x + this.b <= min_y_value) this.y = min_y_value + 90;
             if(this.k * this.x + this.b >= max_y_value) this.y = max_y_value - 90;
-            //this.k = -1 * this.k;
+            this.k = (1 / this.k);
             //this.y = this.k * this.x + this.b;
         }
         else
