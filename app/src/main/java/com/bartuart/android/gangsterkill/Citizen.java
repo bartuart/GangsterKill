@@ -19,26 +19,61 @@ public class Citizen {
     public static Random kRandomizer = new Random(100);
     public static Random bRandomizer = new Random(50);
 
-    public static Random speedRandomizer = new Random(50);
+    public static Random speedRandomizer = new Random(3);
 
 
-    public Citizen(int resourceID, int k, int b, int speed, int parentViewWidth, int parentViewHeight){
+    public Citizen(int resourceID, int k, int b, int speed, int parentViewWidth, int parentViewHeight, int viewCoordinateX, int viewCoordinateY){
         this.resourceID = resourceID;
-        this.x = parentViewWidth;
-        this.y = parentViewHeight;
-        this.k = k;
-        this.b = b;
-        this.speed = speed;
+        this.x = viewCoordinateX + 40;
+        this.y = viewCoordinateX + 40;
+        this.k = 1;
+        this.b = 0;
+        this.speed = 4;
     }
 
-    public void setNewPosition(int parentViewWidth, int parentViewHeight){
-        /*this.x = parentViewWidth - (this.x + this.speed);
-        if(this.x < 0) this.x = - this.x;
+    public void setNewPosition(int parentViewWidth, int parentViewHeight, int viewCoordinateX, int viewCoordinateY){
 
-        this.y = parentViewHeight - (this.k * this.x - this.b);
-        if(this.y < 0) this.y = - this.y; */
+        int min_x_value = viewCoordinateX;
+        int max_x_value = viewCoordinateX + parentViewWidth - 50;
+        //this.x = this.x + this.speed;
+        if(this.x + this.speed <= min_x_value || this.x + this.speed >= max_x_value){
+            this.speed = -1 * this.speed;
+            this.k = this.k * -1;
+        }
+        this.x = this.x + this.speed;
 
-        this.x = parentViewWidth - 25;
-        this.y = parentViewHeight - 45;
+
+        int min_y_value = viewCoordinateX;
+        int max_y_value = viewCoordinateX + parentViewHeight - 50;
+        //this.y = this.k * this.x + this.b;
+        if(this.k * this.x + this.b <= min_y_value || this.k * this.x + this.b >= max_y_value){
+            //this.y = min_y_value + this.y;
+            this.k = this.k * -1;
+        } else
+            this.y = this.k * this.x + this.b;
+
+        /* if(this.y >= max_y_value){
+            this.y = max_y_value - this.y;
+            //this.k = this.k * -1;
+        } */
+
+        /*this.x = (this.x + this.speed) - parentViewWidth;
+        if(this.x < 0)
+            this.x = - this.x;
+
+        this.y = (this.k * this.x + this.b) - parentViewHeight;
+        if(this.y < 0)
+            this.y = - this.y; */
+
+        /* this.x = this.x + this.speed;
+            if(this.x >= parentViewWidth){
+                this.x = parentViewWidth - this.x;
+                this.b = - this.b;
+            }
+        this.y = this.k * this.x + this.b;
+            if(this.y >= parentViewHeight){
+                this.y = - this.y;
+                this.b = - this.b;
+            } */
     }
 }

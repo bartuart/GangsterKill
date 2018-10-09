@@ -25,8 +25,10 @@ public class CitizenAnimationView extends View {
     }*/
 
     private static final int BASE_SPEED_DP_PER_S = 200;
-    private static final int COUNT = 2;
+    private static final int COUNT = 1;
     private static final int SEED = 1337;
+
+    private int [] coordinates;
 
     /** The minimum scale of a star */
     //private static final float SCALE_MIN_PART = 0.45f;
@@ -75,10 +77,20 @@ public class CitizenAnimationView extends View {
     protected void onSizeChanged(int width, int height, int oldw, int oldh) {
         super.onSizeChanged(width, height, oldw, oldh);
 
+        coordinates = new int[2];
+        getLocationOnScreen(coordinates);
+
         // The starting position is dependent on the size of the view,
         // which is why the model is initialized here, when the view is measured.
         for (int i = 0; i < mStars.length; i++) {
-            final Citizen citizen = new Citizen(R.mipmap.citizen, Citizen.kRandomizer.nextInt(), Citizen.bRandomizer.nextInt(), Citizen.speedRandomizer.nextInt(), width, height);
+            final Citizen citizen = new Citizen(R.mipmap.citizen,
+                    Citizen.kRandomizer.nextInt(),
+                    Citizen.bRandomizer.nextInt(),
+                    Citizen.speedRandomizer.nextInt(),
+                    width,
+                    height,
+                    coordinates[0],
+                    coordinates[1]);
             //initializeStar(citizen, width, height);
             mStars[i] = citizen;
         }
@@ -90,9 +102,9 @@ public class CitizenAnimationView extends View {
         for (final Citizen citizen : mStars) {
             // Ignore the star if it's outside of the view bounds
             final float starSize = mBaseSize;
-           /* if (citizen.y + starSize < 0 || citizen.y - starSize > viewHeight) {
+           if (citizen.y + starSize < 0 || citizen.y - starSize > viewHeight) {
                 continue;
-            }*/
+            }
 
             // Save the current canvas state
             final int save = canvas.save();
@@ -193,7 +205,7 @@ public class CitizenAnimationView extends View {
             //    initializeStar(citizen, viewWidth, viewHeight);
             //}
 
-            citizen.setNewPosition(viewWidth, viewHeight);
+            citizen.setNewPosition(viewWidth, viewHeight, coordinates[0], coordinates[1]);
         }
     }
 
