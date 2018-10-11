@@ -7,13 +7,18 @@ import android.util.AttributeSet;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 
+import java.util.Random;
+
 public class CitizenImageView extends AppCompatImageView {
 
     private TimeAnimator mTimeAnimator;
     private long mCurrentPlayTime;
 
-    private int x_incremental = 2;
-    private int y_incremental = 2;
+    private final int MAX_SPEED_VALUE = 25;
+    private int randomSpeedX;
+    private int randomSpeedY;
+
+    private boolean isAnimationStarted;
 
 
     public CitizenImageView(Context context) {
@@ -34,6 +39,11 @@ public class CitizenImageView extends AppCompatImageView {
 
     private void init(){
         setImageResource(R.mipmap.gangster);
+
+        randomSpeedX = new Random().nextInt(MAX_SPEED_VALUE);
+        randomSpeedY = new Random().nextInt(MAX_SPEED_VALUE);
+
+        isAnimationStarted = false;
     }
 
 
@@ -97,21 +107,19 @@ public class CitizenImageView extends AppCompatImageView {
      */
     private void updateState(float deltaMs) {
 
-        //float maxValue1 = getX();
-        //int maxValue2 = Math.round(getX());
+        if(!isAnimationStarted){
+            setX(new Random().nextInt(((View)getParent()).getWidth() - getWidth()));
+            setY(new Random().nextInt(((View)getParent()).getHeight() - getHeight()));
+            isAnimationStarted = true;
+        }
 
-        //int parentWidth = ((View)getParent()).getWidth();
+        if(getX() + randomSpeedX > ((View)getParent()).getWidth() - getWidth() || getX() + randomSpeedX < 0)
+            randomSpeedX = randomSpeedX * -1;
 
+        if(getY() + randomSpeedY > ((View)getParent()).getHeight() - getHeight() || getY() + randomSpeedY < 0)
+            randomSpeedY = randomSpeedY * -1;
 
-
-        if(getX() + x_incremental > ((View)getParent()).getWidth() - getWidth() || getX() + x_incremental < 0)
-            x_incremental = x_incremental * -1;
-
-        if(getY() + y_incremental > ((View)getParent()).getHeight() - getHeight() || getY() + y_incremental < 0)
-            y_incremental = y_incremental * -1;
-
-
-        setX(getX() + x_incremental);
-        setY(getY() + y_incremental);
+        setX(getX() + randomSpeedX);
+        setY(getY() + randomSpeedY);
     }
 }
