@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RelativeLayout game_layout = findViewById(R.id.main_game_field);
-        CitizenImageView image_view = new CitizenImageView(this, R.mipmap.citizen);
+        CitizenImageView image_view = new CitizenImageView(MainActivity.this, R.mipmap.citizen);
         game_layout.addView(image_view);
 
         CitizenImageView image_view1 = new CitizenImageView(this, R.mipmap.gangster);
