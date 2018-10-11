@@ -1,6 +1,7 @@
 package com.bartuart.android.gangsterkill;
 
 import android.animation.ObjectAnimator;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,23 @@ public class MainActivity extends AppCompatActivity {
 
         CitizenImageView image_view2 = new CitizenImageView(MainActivity.this, R.mipmap.citizen);
         game_layout.addView(image_view2);
+
+        // Init
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+
+            int scores = 0;
+            TextView score_text_view = findViewById(R.id.game_scrore_text_view);
+
+            @Override
+            public void run() {
+                score_text_view.setText("Score: " + scores++);
+                handler.postDelayed(this, 5000);
+            }
+        };
+
+        //Start
+        handler.postDelayed(runnable, 5000);
 
 
     }
