@@ -6,18 +6,11 @@ import android.util.AttributeSet;
 
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
-import android.view.ViewTreeObserver;
-
-import java.util.Random;
 
 public class CitizenImageView extends AppCompatImageView {
 
     private TimeAnimator mTimeAnimator;
     private long mCurrentPlayTime;
-
-    private int maxXValue;
-    private int maxYValue;
-
 
     private int x_incremental = 2;
     private int y_incremental = 2;
@@ -70,31 +63,6 @@ public class CitizenImageView extends AppCompatImageView {
         mTimeAnimator.setTimeListener(null);
         mTimeAnimator.removeAllListeners();
         mTimeAnimator = null;
-    }
-
-    @Override
-    protected void onMeasure (int widthMeasureSpec,
-                              int heightMeasureSpec){
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        /*float maxValue1 = getX();
-        int maxValue2 = Math.round(getX());
-
-        int parentWidth = ((View)getParent()).getWidth();
-
-        maxXValue = Math.round(getX()) + ((View)getParent()).getWidth();
-        maxYValue = Math.round(getY()) + ((View)getParent()).getHeight();
-
-        Random x_init_random = new Random();
-        Random y_init_random = new Random();
-
-        int x_init_value = x_init_random.nextInt(((View)getParent()).getWidth());
-        if(x_init_value > getX())
-            setX(getX() + x_init_value);
-
-        int y_init_value = y_init_random.nextInt(((View)getParent()).getHeight());
-        if(y_init_value > getY())
-            setY(getY() + y_init_random.nextInt(((View)getParent()).getHeight() - 10)); */
     }
 
     /**
