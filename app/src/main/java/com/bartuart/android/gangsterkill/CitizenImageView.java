@@ -15,14 +15,24 @@ public class CitizenImageView extends AppCompatImageView {
     private long mCurrentPlayTime;
 
     private final int MAX_SPEED_VALUE = 25;
+    private final int CITIZEN_RESOURCE_ID = R.mipmap.citizen;
+    private final int GANGSTER_RESOURCE_ID = R.mipmap.gangster;
     private int randomSpeedX;
     private int randomSpeedY;
 
     private boolean isAnimationStarted;
 
+    private int imageResourceID = R.mipmap.citizen;
+
 
     public CitizenImageView(Context context) {
         super(context);
+        init();
+    }
+
+    public CitizenImageView(Context context, int imageResourceID) {
+        super(context);
+        this.imageResourceID = imageResourceID;
         init();
     }
 
@@ -38,7 +48,7 @@ public class CitizenImageView extends AppCompatImageView {
 
 
     private void init(){
-        setImageResource(R.mipmap.gangster);
+        setImageResource(this.imageResourceID);
 
         randomSpeedX = new Random().nextInt(MAX_SPEED_VALUE);
         randomSpeedY = new Random().nextInt(MAX_SPEED_VALUE);
