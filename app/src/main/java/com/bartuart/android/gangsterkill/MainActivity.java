@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         CitizenImageView image_view = new CitizenImageView(this);
         game_layout.addView(image_view);
 
+        CitizenImageView image_view1 = new CitizenImageView(this);
+        game_layout.addView(image_view1);
+
+        CitizenImageView image_view2 = new CitizenImageView(this);
+        game_layout.addView(image_view2);
+
     }
 
 }
