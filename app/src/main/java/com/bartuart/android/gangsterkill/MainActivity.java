@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout game_layout = findViewById(R.id.main_game_field);
         CitizenImageView image_view = new CitizenImageView(this);
         game_layout.addView(image_view);
+
 
         //mAnimationView = (CitizenAnimationView) findViewById(R.id.main_game_field);
 
