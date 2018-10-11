@@ -64,13 +64,13 @@
 
     </RelativeLayout>
 
-    <com.bartuart.android.gangsterkill.CitizenAnimationView
+    <RelativeLayout
         android:id="@+id/main_game_field"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:background="@drawable/main_background">
-    </com.bartuart.android.gangsterkill.CitizenAnimationView>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

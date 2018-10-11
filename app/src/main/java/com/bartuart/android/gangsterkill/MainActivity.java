@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAnimationView = (CitizenAnimationView) findViewById(R.id.main_game_field);
+        //mAnimationView = (CitizenAnimationView) findViewById(R.id.main_game_field);
 
 
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         im.setVisibility(View.VISIBLE);*/
     }
 
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         mAnimationView.resume();
@@ -73,6 +73,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mAnimationView.pause();
         mAnimationView = null;
-    }
+    }*/
 
 }
