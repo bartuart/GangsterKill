@@ -1,6 +1,7 @@
 package com.bartuart.android.gangsterkill;
 
 import android.animation.TimeAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 
@@ -25,6 +26,8 @@ public class CitizenImageView extends AppCompatImageView {
     private boolean isAnimationStarted;
 
     private int imageResourceID = R.mipmap.citizen;
+
+    //private TextView score_text;
 
 
     public CitizenImageView(Context context) {
@@ -57,14 +60,8 @@ public class CitizenImageView extends AppCompatImageView {
 
         isAnimationStarted = false;
 
-        setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Yees, it works!",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
+        //View rootView = ((Activity)getContext()).getWindow().getDecorView().findViewById(R.id.game_scrore_text_view);
+        //score_text = ((Activity)getContext()).getWindow().getDecorView().findViewById(R.id.game_scrore_text_view);
     }
 
 
@@ -85,6 +82,18 @@ public class CitizenImageView extends AppCompatImageView {
             }
         });
         mTimeAnimator.start();
+
+        setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                int score = 0;
+                //score_text.setText("Score: " + score++);
+                //Toast.makeText(getContext(), "Yees, it works!" + score_counter++,
+                  //      Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

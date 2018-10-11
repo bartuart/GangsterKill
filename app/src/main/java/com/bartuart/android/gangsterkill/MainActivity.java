@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    //public static int score_counter = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,12 @@ public class MainActivity extends AppCompatActivity {
         CitizenImageView image_view = new CitizenImageView(MainActivity.this, R.mipmap.citizen);
         game_layout.addView(image_view);
 
-        CitizenImageView image_view1 = new CitizenImageView(this, R.mipmap.gangster);
+        CitizenImageView image_view1 = new CitizenImageView(MainActivity.this, R.mipmap.gangster);
         game_layout.addView(image_view1);
 
-        CitizenImageView image_view2 = new CitizenImageView(this, R.mipmap.citizen);
+        CitizenImageView image_view2 = new CitizenImageView(MainActivity.this, R.mipmap.citizen);
         game_layout.addView(image_view2);
+
 
     }
 
