@@ -90,8 +90,8 @@ public class CitizenImageView extends AppCompatImageView {
 
                 int score = 0;
                 //score_text.setText("Score: " + score++);
-                //Toast.makeText(getContext(), "Yees, it works!" + score_counter++,
-                  //      Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Yees, it works!",
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
