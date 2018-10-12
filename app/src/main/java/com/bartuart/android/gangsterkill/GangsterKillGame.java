@@ -4,7 +4,6 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -126,11 +125,6 @@ public class GangsterKillGame {
         reset();
         citizenLayout.setBackgroundResource(R.drawable.ghost);
         gameOverFlag = true;
-        //gameHandler.removeCallbacks(gameRunnable);
-        //gameHandler.removeCallbacksAndMessages(null);
-        //gameRunnable = null;
-        //gameHandler = null;
-        //MediaPlayer mediaPlayer = MediaPlayer.create(mainActivityContext, R.raw.shout);
         mediaPlayer.start();
     }
 
@@ -149,7 +143,6 @@ public class GangsterKillGame {
         if(gameRunnable != null){
             gameHandler.removeCallbacks(gameRunnable);
             gameHandler.removeCallbacksAndMessages(null);
-            //gameRunnable = null;
         }
         gameRunnable = new Runnable() {
             @Override
@@ -159,7 +152,6 @@ public class GangsterKillGame {
             }
         };
 
-        //Start
         gameHandler.postDelayed(gameRunnable, GAME_INTERVAL);
     }
 
@@ -168,7 +160,6 @@ public class GangsterKillGame {
         gameHandler.removeCallbacks(gameRunnable);
         gameHandler.removeCallbacksAndMessages(null);
         gameRunnable = null;
-        //gameHandler = null;
         citizenLayout.setBackgroundResource(gameLayoutOriginalResourceID);
         if(mediaPlayer != null && mediaPlayer.isPlaying()){
             mediaPlayer.stop();

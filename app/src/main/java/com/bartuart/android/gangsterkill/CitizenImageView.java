@@ -123,10 +123,7 @@ public class CitizenImageView extends AppCompatImageView {
         }
     }
 
-    /**
-     * Progress the animation by moving the stars based on the elapsed time
-     * @param deltaMs time delta since the last frame, in millis
-     */
+
     private void updateState(float deltaMs) {
 
         if(!isAnimationStarted){
