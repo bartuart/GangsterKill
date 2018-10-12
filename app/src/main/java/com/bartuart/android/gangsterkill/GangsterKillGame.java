@@ -4,9 +4,12 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 public class GangsterKillGame {
 
@@ -128,7 +131,7 @@ public class GangsterKillGame {
         //gameRunnable = null;
         //gameHandler = null;
         //MediaPlayer mediaPlayer = MediaPlayer.create(mainActivityContext, R.raw.shout);
-        //mediaPlayer.start();
+        mediaPlayer.start();
     }
 
     public static void startGame(){
@@ -136,10 +139,11 @@ public class GangsterKillGame {
         citizenLayout.setBackgroundResource(gameLayoutOriginalResourceID);
         if(mediaPlayer != null && mediaPlayer.isPlaying()){
             mediaPlayer.stop();
-        }
+            try {
+                mediaPlayer.prepare();
+            } catch (IOException e) {
 
-        if(gameHandler == null){
-            gameHandler = new Handler();
+            }
         }
 
         if(gameRunnable != null){
@@ -168,6 +172,11 @@ public class GangsterKillGame {
         citizenLayout.setBackgroundResource(gameLayoutOriginalResourceID);
         if(mediaPlayer != null && mediaPlayer.isPlaying()){
             mediaPlayer.stop();
+            try {
+                mediaPlayer.prepare();
+            } catch (IOException e) {
+
+            }
         }
     }
 }
