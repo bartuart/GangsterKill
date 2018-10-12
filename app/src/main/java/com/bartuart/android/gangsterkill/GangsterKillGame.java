@@ -87,6 +87,7 @@ public class GangsterKillGame {
             for(int i = 0; i < CITIZEN_TOTAL_COUNT; i++){
                 citizenLayout.addView(new CitizenImageView(mainActivityContext, CITIZEN_RESOURCE_ID, MAX_SPEED_VALUE));
             }
+            isCitizensCreated = true;
         }
     }
 
@@ -106,6 +107,7 @@ public class GangsterKillGame {
 
     public static void resetGame(){
         reset();
+        gameHandler.removeCallbacks(gameRunnable);
         gameRunnable = null;
     }
 }
