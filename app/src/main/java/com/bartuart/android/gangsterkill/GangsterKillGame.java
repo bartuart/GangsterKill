@@ -1,6 +1,7 @@
 package com.bartuart.android.gangsterkill;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -56,6 +57,7 @@ public class GangsterKillGame {
 
         if(gameScores < 0 ){
             scoreTextView.setTextColor(mainActivityContext.getResources().getColor(R.color.colorScoreTextLose));
+            gameOver();
         }
     }
 
@@ -81,6 +83,7 @@ public class GangsterKillGame {
 
             if(gameScores < 0 ){
                 scoreTextView.setTextColor(mainActivityContext.getResources().getColor(R.color.colorScoreTextLose));
+                gameOver();
             } else scoreTextView.setTextColor(mainActivityContext.getResources().getColor(R.color.colorScoreTextWin));
 
             scoreTextView.setText(mainActivityContext.getResources().getString(R.string.score_text) + " " + gameScores);
@@ -96,6 +99,13 @@ public class GangsterKillGame {
             }
             isCitizensCreated = true;
         }
+    }
+
+    private static void gameOver(){
+        reset();
+        citizenLayout.setBackgroundResource(R.drawable.ghost);
+        MediaPlayer mediaPlayer = MediaPlayer.create(mainActivityContext, R.raw.shout);
+        mediaPlayer.start();
     }
 
     public static void startGame(){
