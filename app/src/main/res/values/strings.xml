@@ -2,7 +2,7 @@
     <string name="app_name">GangsterKill</string>
     <string name="gangster_text">Gangster</string>
     <string name="citizen_text">Citizen</string>
-    <string name="score_text">Score: 0</string>
+    <string name="score_text">Score:</string>
     <string name="start_button_text">Start</string>
     <string name="stop_button_text">Stop</string>
     <string name="reset_button_text">Reset</string>
