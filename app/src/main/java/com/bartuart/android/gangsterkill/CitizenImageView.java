@@ -1,14 +1,12 @@
 package com.bartuart.android.gangsterkill;
 
 import android.animation.TimeAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import java.util.Random;
 
@@ -17,7 +15,7 @@ public class CitizenImageView extends AppCompatImageView {
     private TimeAnimator mTimeAnimator;
     private long mCurrentPlayTime;
 
-    private final int MAX_SPEED_VALUE = 25;
+    private int maxSpeedValue;
     private int randomSpeedX;
     private int randomSpeedY;
 
@@ -25,7 +23,7 @@ public class CitizenImageView extends AppCompatImageView {
 
     private int imageResourceID = R.mipmap.citizen;
 
-    //private TextView score_text;
+    private ImageView currentViewReference;
 
 
     public CitizenImageView(Context context) {
@@ -33,9 +31,10 @@ public class CitizenImageView extends AppCompatImageView {
         init();
     }
 
-    public CitizenImageView(Context context, int imageResourceID) {
+    public CitizenImageView(Context context, int imageResourceID, int pMaxSpeedValue) {
         super(context);
         this.imageResourceID = imageResourceID;
+        this.maxSpeedValue = pMaxSpeedValue;
         init();
     }
 
@@ -53,8 +52,8 @@ public class CitizenImageView extends AppCompatImageView {
     private void init(){
         setImageResource(this.imageResourceID);
 
-        randomSpeedX = new Random().nextInt(MAX_SPEED_VALUE);
-        randomSpeedY = new Random().nextInt(MAX_SPEED_VALUE);
+        randomSpeedX = new Random().nextInt(maxSpeedValue);
+        randomSpeedY = new Random().nextInt(maxSpeedValue);
 
         isAnimationStarted = false;
 
@@ -70,9 +69,11 @@ public class CitizenImageView extends AppCompatImageView {
                 //score_text.setText("Score: " + score++);
                 //Toast.makeText(getContext(), "Yees, it works!",
                  //       Toast.LENGTH_LONG).show();
-                GangsterKillGame.updateScore(imageResourceID);
+                GangsterKillGame.updateScore(imageResourceID, currentViewReference);
             }
         });
+
+        currentViewReference = this;
     }
 
 
@@ -151,4 +152,6 @@ public class CitizenImageView extends AppCompatImageView {
         setX(getX() + randomSpeedX);
         setY(getY() + randomSpeedY);
     }
+
+    public int getImageResourceID(){ return imageResourceID; }
 }
