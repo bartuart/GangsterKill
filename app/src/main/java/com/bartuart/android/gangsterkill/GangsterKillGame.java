@@ -25,10 +25,8 @@ public class GangsterKillGame {
     public static int gameScores = 0;
 
     private static final int GAME_INTERVAL = 2000;
-    private static final Handler gameHandler = new Handler();
+    private static Handler gameHandler = new Handler();
     private static Runnable gameRunnable;
-
-
 
     private static boolean isCitizensCreated = false;
 
@@ -37,11 +35,29 @@ public class GangsterKillGame {
     private static RelativeLayout citizenLayout = null;
     private static AppCompatActivity mainActivityReference;
 
-    public static void setContent(TextView pScoreTextView, AppCompatActivity pMainActivityReference, RelativeLayout pCitizenRelativeLayout){
+    private static MediaPlayer mediaPlayer;
+
+    private static int gameLayoutOriginalResourceID;
+
+    private static boolean gameOverFlag = false;
+
+    public static void setContent(TextView pScoreTextView,
+                                  AppCompatActivity pMainActivityReference,
+                                  RelativeLayout pCitizenRelativeLayout,
+                                  int pGameLayoutOriginalResourceID){
         scoreTextView = pScoreTextView;
         mainActivityReference = pMainActivityReference;
         mainActivityContext = mainActivityReference.getApplicationContext();
         citizenLayout = pCitizenRelativeLayout;
+        mediaPlayer = MediaPlayer.create(mainActivityContext, R.raw.shout);
+        gameLayoutOriginalResourceID = pGameLayoutOriginalResourceID;
+    }
+
+    public static void releaseMediaPlayer(){
+        if(mediaPlayer != null){
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     public static void updateScore(int citizenImageResourceID, ImageView currentImageView){
@@ -67,6 +83,7 @@ public class GangsterKillGame {
         citizenLayout.removeAllViews();
         scoreTextView.setTextColor(mainActivityContext.getResources().getColor(R.color.colorScoreTextWin));
         scoreTextView.setText(mainActivityContext.getResources().getString(R.string.score_text) + " " + gameScores);
+        gameOverFlag = false;
     }
 
     private static void resume(){
@@ -90,6 +107,7 @@ public class GangsterKillGame {
 
             isCitizensCreated = false;
         } else {
+            if(gameOverFlag) return;
             for(int i = 0; i < GANGSTER_TOTAL_COUNT; i++){
                 citizenLayout.addView(new CitizenImageView(mainActivityContext, GANGSTER_RESOURCE_ID, MAX_SPEED_VALUE));
             }
@@ -104,15 +122,30 @@ public class GangsterKillGame {
     private static void gameOver(){
         reset();
         citizenLayout.setBackgroundResource(R.drawable.ghost);
-        MediaPlayer mediaPlayer = MediaPlayer.create(mainActivityContext, R.raw.shout);
-        mediaPlayer.start();
+        gameOverFlag = true;
+        //gameHandler.removeCallbacks(gameRunnable);
+        //gameHandler.removeCallbacksAndMessages(null);
+        //gameRunnable = null;
+        //gameHandler = null;
+        //MediaPlayer mediaPlayer = MediaPlayer.create(mainActivityContext, R.raw.shout);
+        //mediaPlayer.start();
     }
 
     public static void startGame(){
         reset();
+        citizenLayout.setBackgroundResource(gameLayoutOriginalResourceID);
+        if(mediaPlayer != null && mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+        }
+
+        if(gameHandler == null){
+            gameHandler = new Handler();
+        }
+
         if(gameRunnable != null){
             gameHandler.removeCallbacks(gameRunnable);
-            gameRunnable = null;
+            gameHandler.removeCallbacksAndMessages(null);
+            //gameRunnable = null;
         }
         gameRunnable = new Runnable() {
             @Override
@@ -129,6 +162,12 @@ public class GangsterKillGame {
     public static void resetGame(){
         reset();
         gameHandler.removeCallbacks(gameRunnable);
+        gameHandler.removeCallbacksAndMessages(null);
         gameRunnable = null;
+        //gameHandler = null;
+        citizenLayout.setBackgroundResource(gameLayoutOriginalResourceID);
+        if(mediaPlayer != null && mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+        }
     }
 }

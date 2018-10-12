@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView scoreTextView = findViewById(R.id.game_scrore_text_view);
         RelativeLayout game_layout = findViewById(R.id.main_game_field);
-        GangsterKillGame.setContent(scoreTextView, MainActivity.this, game_layout);
+        GangsterKillGame.setContent(scoreTextView, MainActivity.this, game_layout, R.drawable.main_background);
 
         Button start_button = findViewById(R.id.start_stop_button);
         start_button.setOnClickListener(new View.OnClickListener() {
@@ -32,5 +32,11 @@ public class MainActivity extends AppCompatActivity {
                 GangsterKillGame.resetGame();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        GangsterKillGame.releaseMediaPlayer();
     }
 }
