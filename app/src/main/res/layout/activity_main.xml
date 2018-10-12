@@ -86,6 +86,7 @@
             android:layout_alignParentLeft="true"
             android:text="@string/start_button_text"/>
         <Button
+            android:id="@+id/reset_stop_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
