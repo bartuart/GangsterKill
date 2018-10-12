@@ -18,8 +18,6 @@ public class CitizenImageView extends AppCompatImageView {
     private long mCurrentPlayTime;
 
     private final int MAX_SPEED_VALUE = 25;
-    private final int CITIZEN_RESOURCE_ID = R.mipmap.citizen;
-    private final int GANGSTER_RESOURCE_ID = R.mipmap.gangster;
     private int randomSpeedX;
     private int randomSpeedY;
 
@@ -62,6 +60,19 @@ public class CitizenImageView extends AppCompatImageView {
 
         //View rootView = ((Activity)getContext()).getWindow().getDecorView().findViewById(R.id.game_scrore_text_view);
         //score_text = ((Activity)getContext()).getWindow().getDecorView().findViewById(R.id.game_scrore_text_view);
+
+        setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                int score = 0;
+                //score_text.setText("Score: " + score++);
+                //Toast.makeText(getContext(), "Yees, it works!",
+                 //       Toast.LENGTH_LONG).show();
+                GangsterKillGame.updateScore(imageResourceID);
+            }
+        });
     }
 
 
@@ -82,18 +93,6 @@ public class CitizenImageView extends AppCompatImageView {
             }
         });
         mTimeAnimator.start();
-
-        setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                int score = 0;
-                //score_text.setText("Score: " + score++);
-                Toast.makeText(getContext(), "Yees, it works!",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override

@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView scoreTextView = findViewById(R.id.game_scrore_text_view);
+        GangsterKillGame.setContent(scoreTextView, MainActivity.this);
+
         RelativeLayout game_layout = findViewById(R.id.main_game_field);
         CitizenImageView image_view = new CitizenImageView(MainActivity.this, R.mipmap.citizen);
         game_layout.addView(image_view);
@@ -37,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
         CitizenImageView image_view2 = new CitizenImageView(MainActivity.this, R.mipmap.citizen);
         game_layout.addView(image_view2);
 
+        //game_layout.removeAllViews();
+
         // Init
-        final Handler handler = new Handler();
+        /*final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
 
             int scores = 0;
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Start
         handler.postDelayed(runnable, 5000);
+        */
 
 
     }
