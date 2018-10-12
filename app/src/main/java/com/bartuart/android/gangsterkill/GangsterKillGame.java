@@ -100,6 +100,10 @@ public class GangsterKillGame {
 
     public static void startGame(){
         reset();
+        if(gameRunnable != null){
+            gameHandler.removeCallbacks(gameRunnable);
+            gameRunnable = null;
+        }
         gameRunnable = new Runnable() {
             @Override
             public void run() {
