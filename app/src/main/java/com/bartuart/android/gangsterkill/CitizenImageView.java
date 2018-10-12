@@ -57,18 +57,10 @@ public class CitizenImageView extends AppCompatImageView {
 
         isAnimationStarted = false;
 
-        //View rootView = ((Activity)getContext()).getWindow().getDecorView().findViewById(R.id.game_scrore_text_view);
-        //score_text = ((Activity)getContext()).getWindow().getDecorView().findViewById(R.id.game_scrore_text_view);
-
         setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                int score = 0;
-                //score_text.setText("Score: " + score++);
-                //Toast.makeText(getContext(), "Yees, it works!",
-                 //       Toast.LENGTH_LONG).show();
                 GangsterKillGame.updateScore(imageResourceID, currentViewReference);
             }
         });
