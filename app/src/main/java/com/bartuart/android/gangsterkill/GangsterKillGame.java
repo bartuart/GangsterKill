@@ -19,11 +19,11 @@ public class GangsterKillGame {
     private static final int DELTA_POINTS_FOR_GANGSTER_KILL = 1;
     private static final int DELTA_POINTS_FOR_NOT_KILLED_GANGSTER = -1;
 
-    private static final int MAX_SPEED_VALUE = 25;
+    private static final int MAX_SPEED_VALUE = 10;
 
     public static int gameScores = 0;
 
-    private static final int GAME_INTERVAL = 5000;
+    private static final int GAME_INTERVAL = 2000;
     private static final Handler gameHandler = new Handler();
     private static Runnable gameRunnable;
 
@@ -78,6 +78,13 @@ public class GangsterKillGame {
                 }
             }
             citizenLayout.removeAllViews();
+
+            if(gameScores < 0 ){
+                scoreTextView.setTextColor(mainActivityContext.getResources().getColor(R.color.colorScoreTextLose));
+            } else scoreTextView.setTextColor(mainActivityContext.getResources().getColor(R.color.colorScoreTextWin));
+
+            scoreTextView.setText(mainActivityContext.getResources().getString(R.string.score_text) + " " + gameScores);
+
             isCitizensCreated = false;
         } else {
             for(int i = 0; i < GANGSTER_TOTAL_COUNT; i++){
